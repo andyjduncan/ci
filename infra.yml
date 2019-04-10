@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Greeter Application
+Resources:
+  Repository:
+    Type: AWS::ECR::Repository
+Outputs:
+  RepositoryOuput:
+    Description: Greeter application repository name
+    Value: !Sub '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repository}'
+    Export:
+      Name: !Sub '${AWS::StackName}Repository'

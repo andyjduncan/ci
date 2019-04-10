@@ -1,0 +1,35 @@
+plugins {
+    id 'groovy'
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id 'com.bmuschko.docker-spring-boot-application' version '4.7.0'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.adjectivecolournoun'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.codehaus.groovy:groovy'
+    testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
+    testImplementation 'org.apache.commons:commons-lang3:3.8.1'
+}
+
+docker {
+
+    registryCredentials {
+        username = project.dockerUsername
+        password = project.dockerPassword
+    }
+
+    springBootApplication {
+        tag = "${project.dockerRepository}:latest"
+    }
+}
